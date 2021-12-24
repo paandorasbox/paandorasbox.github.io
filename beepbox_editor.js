@@ -119,8 +119,6 @@ var beepbox = (function (exports) {
 		{ name: "choir", expression: 2.0, isSampled: true, extraSampleDetune: -3, samples: centerWave(choirsample) },
 		{ name: "overdriveguitar", expression: 2.0, isSampled: true, extraSampleDetune: -6.2, samples: centerWave(overdrivensample) },
 		{ name: "flute", expression: 2.0, isSampled: true, extraSampleDetune: -6, samples: centerWave(flutesample) },
-		{ name: "meow", expression: 2.0, isSampled: true, extraSampleDetune: -1, samples: centerWave(meowsample) },
-		{ name: "fart", expression: 2.0, isSampled: true, extraSampleDetune: -1, samples: centerWave(thegame) },
     ]);
 	
     Config.chipNoises = toNameMap([
