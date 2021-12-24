@@ -106,19 +106,21 @@ var beepbox = (function (exports) {
         { name: "spiky", expression: 0.4, isSampled: false, samples: centerWave([1.0, -1.0, 1.0, -1.0, 1.0, 0.0]) },
 		{ name: "kick", expression: 4.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(kicksample) },
 		{ name: "snare", expression: 3.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(snaresample) },
-		{ name: "piano1", expression: 3.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(pianosample) },
+		{ name: "piano1", expression: 3.0, isSampled: true, extraSampleDetune: 2, samples: centerWave(pianosample) },
 		{ name: "WOW", expression: 1.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(WOWsample) },
-		{ name: "overdrive", expression: 1.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(overdrivesample) },
+		{ name: "overdrive", expression: 1.0, isSampled: true, extraSampleDetune: -2, samples: centerWave(overdrivesample) },
 		{ name: "trumpet", expression: 3.0, isSampled: true, extraSampleDetune: 1.2, samples: centerWave(trumpetsample) },
-		{ name: "saxophone", expression: 2.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(saxophonesample) },
-		{ name: "orchestrahit", expression: 2.0, isSampled: true, extraSampleDetune: 1.2, samples: centerWave(orchhitsample) },
+		{ name: "saxophone", expression: 2.0, isSampled: true, extraSampleDetune: -5, samples: centerWave(saxophonesample) },
+		{ name: "orchestrahit", expression: 2.0, isSampled: true, extraSampleDetune: 4.2, samples: centerWave(orchhitsample) },
 		{ name: "detatched violin", expression: 2.0, isSampled: true, extraSampleDetune: 4.2, samples: centerWave(detatchedviolinsample) },
-		{ name: "synth", expression: 2.0, isSampled: true, extraSampleDetune: 1.3, samples: centerWave(synthsample) },
+		{ name: "synth", expression: 2.0, isSampled: true, extraSampleDetune: -0.8, samples: centerWave(synthsample) },
 		{ name: "sonic3snare", expression: 2.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(sonic3snaresample) },
 		{ name: "come on", expression: 2.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(comeonsample) },
-		{ name: "choir", expression: 2.0, isSampled: true, extraSampleDetune: 0, samples: centerWave(choirsample) },
+		{ name: "choir", expression: 2.0, isSampled: true, extraSampleDetune: -3, samples: centerWave(choirsample) },
 		{ name: "overdriveguitar", expression: 2.0, isSampled: true, extraSampleDetune: -6.2, samples: centerWave(overdrivensample) },
 		{ name: "flute", expression: 2.0, isSampled: true, extraSampleDetune: -6, samples: centerWave(flutesample) },
+		{ name: "meow", expression: 2.0, isSampled: true, extraSampleDetune: -1, samples: centerWave(meowsample) },
+		{ name: "fart", expression: 2.0, isSampled: true, extraSampleDetune: -1, samples: centerWave(thegame) },
     ]);
 	
     Config.chipNoises = toNameMap([
@@ -521,7 +523,7 @@ var beepbox = (function (exports) {
             return null;
         }
     }
-    EditorConfig.version = "2.0";
+    EditorConfig.version = "2.25";
     EditorConfig.versionDisplayName = "Pandora's Box";
     EditorConfig.releaseNotesURL = "https://github.com/johnnesky/beepbox/releases/tag/v" + EditorConfig.version;
     EditorConfig.isOnMac = /^Mac/i.test(navigator.platform) || /Mac OS X/i.test(navigator.userAgent) || /^(iPhone|iPad|iPod)/i.test(navigator.platform) || /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
@@ -7803,7 +7805,7 @@ var beepbox = (function (exports) {
             else if (instrument.type == 0) {
                 baseExpression = Config.chipBaseExpression;
 				if (Config.chipWaves[instrument.chipWave].isSampled == true) {
-					basePitch = -51 + Config.chipWaves[instrument.chipWave].extraSampleDetune
+					basePitch = basePitch - 63 + Config.chipWaves[instrument.chipWave].extraSampleDetune
 				}
             }
             else if (instrument.type == 5) {
