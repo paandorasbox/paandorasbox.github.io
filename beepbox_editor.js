@@ -136,7 +136,7 @@ var beepbox = (function (exports) {
 		{ name: "overdriveguitar", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -6.2, samples: centerWave(overdrivensample) },
 		{ name: "flute", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -6, samples: centerWave(flutesample) },
 	]);
-		Config.newWaves = toNameMap([
+	Config.newWaves = toNameMap([
 		{ name: "sine", expression: 0.88, isSampled: false, samples: centerAndNormalizeWave([8.0, 9.0, 11.0, 12.0, 13.0, 14.0, 15.0, 15.0, 15.0, 15.0, 14.0, 14.0, 13.0, 11.0, 10.0, 9.0, 7.0, 6.0, 4.0, 3.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 4.0, 5.0, 6.0]) },
         { name: "flute", expression: 0.8, isSampled: false, samples: centerAndNormalizeWave([3.0, 4.0, 6.0, 8.0, 10.0, 11.0, 13.0, 14.0, 15.0, 15.0, 14.0, 13.0, 11.0, 8.0, 5.0, 3.0]) },
         { name: "harp", expression: 0.8, isSampled: false, samples: centerAndNormalizeWave([0.0, 3.0, 3.0, 3.0, 4.0, 5.0, 5.0, 6.0, 7.0, 8.0, 9.0, 11.0, 11.0, 13.0, 13.0, 15.0, 15.0, 14.0, 12.0, 11.0, 10.0, 9.0, 8.0, 7.0, 7.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.0, 0.0]) },
@@ -24120,6 +24120,7 @@ You should be redirected to the song at:<br /><br />
             return songs;
         }
         saveVersion(uid, name, songData) {
+			console.log("tes")
             const newName = name;
             const newTime = Math.round(Date.now());
             clearTimeout(this._saveVersionTimeoutHandle);
@@ -27244,6 +27245,9 @@ You should be redirected to the song at:<br /><br />
                     case "copyEmbed":
                         this._copyTextToClipboard(`<iframe width="384" height="60" style="border: none;" src="${new URL("player/#song=" + this._doc.song.toBase64String(), location.href).href}"></iframe>`);
                         break;
+					case "songRecovery":
+                        this._openPrompt("songRecovery");
+                        break;
                 }
                 this._fileMenu.selectedIndex = 0;
             };
@@ -27779,6 +27783,9 @@ You should be redirected to the song at:<br /><br />
                         break;
                     case "barCount":
                         this.prompt = new SongDurationPrompt(this._doc);
+                        break;
+					case "songRecovery":
+                        this.prompt = new SongRecoveryPrompt(this._doc);
                         break;
                     case "beatsPerBar":
                         this.prompt = new BeatsPerBarPrompt(this._doc);
@@ -28778,6 +28785,7 @@ You should be redirected to the song at:<br /><br />
             this.addedEnvelope = false;
             this._recentChange = null;
             this._sequenceNumber = 0;
+			this._recovery = new SongRecovery();
             this._lastSequenceNumber = 0;
             this._stateShouldBePushed = false;
             this._recordedNewSong = false;
@@ -28884,6 +28892,9 @@ You should be redirected to the song at:<br /><br />
                     this._resetSongRecoveryUid();
                 }
                 else {
+					console.log(this._recoveryUid)
+					console.log(this.song.title)
+					console.log(hash)
                     this._recovery.saveVersion(this._recoveryUid, this.song.title, hash);
                 }
                 let state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: this.prompt, selection: this.selection.toJSON() };
