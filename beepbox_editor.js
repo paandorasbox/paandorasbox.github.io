@@ -24120,7 +24120,6 @@ You should be redirected to the song at:<br /><br />
             return songs;
         }
         saveVersion(uid, name, songData) {
-			console.log("tes")
             const newName = name;
             const newTime = Math.round(Date.now());
             clearTimeout(this._saveVersionTimeoutHandle);
@@ -28892,9 +28891,6 @@ You should be redirected to the song at:<br /><br />
                     this._resetSongRecoveryUid();
                 }
                 else {
-					console.log(this._recoveryUid)
-					console.log(this.song.title)
-					console.log(hash)
                     this._recovery.saveVersion(this._recoveryUid, this.song.title, hash);
                 }
                 let state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: this.prompt, selection: this.selection.toJSON() };
