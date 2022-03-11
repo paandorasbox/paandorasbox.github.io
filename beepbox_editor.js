@@ -151,6 +151,8 @@ var beepbox = (function (exports) {
         { name: "glitch", expression: 0.5, isSampled: false, samples: centerWave([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0]) },
 	]);
     Config.chipWaves = rawChipToIntegrated(Config.rawChipWaves).concat(rawChipToIntegrated(Config.sampledWaves), rawChipToIntegrated(Config.newWaves));
+	Config.rawRawChipWaves = Config.rawChipWaves.concat(Config.sampledWaves,Config.newWaves);
+	Config.jummboxWaves = Config.rawChipWaves.concat(Config.newWaves);
     Config.chipNoises = toNameMap([
         { name: "retro", expression: 0.25, basePitch: 69, pitchFilterMult: 1024.0, isSoft: false, samples: null },
         { name: "white", expression: 1.0, basePitch: 69, pitchFilterMult: 8.0, isSoft: true, samples: null },
@@ -741,7 +743,7 @@ var beepbox = (function (exports) {
         }
     }
     EditorConfig.version = "3.0";
-    EditorConfig.versionDisplayName = "JummBox " + EditorConfig.version;
+    EditorConfig.versionDisplayName = "PandorasBox " + EditorConfig.version;
     EditorConfig.releaseNotesURL = "https://jummbus.bitbucket.io/patch_notes/" + EditorConfig.version + ".html";
     EditorConfig.isOnMac = /^Mac/i.test(navigator.platform) || /Mac OS X/i.test(navigator.userAgent) || /^(iPhone|iPad|iPod)/i.test(navigator.platform) || /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
     EditorConfig.ctrlSymbol = EditorConfig.isOnMac ? "⌘" : "Ctrl+";
@@ -12153,7 +12155,7 @@ li.select2-results__option[role=group] > strong:hover {
             var volumeScale = 1.0;
             if (!isCustomWave) {
                 if (aliases) {
-                    wave = Config.rawChipWaves[instrument.chipWave].samples;
+                    wave = Config.rawRawChipWaves[instrument.chipWave].samples;
                 }
                 else {
                     wave = Config.chipWaves[instrument.chipWave].samples;
@@ -25597,7 +25599,7 @@ You should be redirected to the song at:<br /><br />
                 ]),
             ]);
             this._customWaveDrawCanvas = new CustomChipCanvas(canvas({ width: 128, height: 52, style: "border:2px solid " + ColorConfig.uiWidgetBackground, id: "customWaveDrawCanvas" }), this._doc, (newArray) => new ChangeCustomWave(this._doc, newArray));
-            this._customWavePresetDrop = buildHeaderedOptions("Load Preset", select$6({ style: "width: 50%; height:1.5em; text-align: center; text-align-last: center;" }), Config.rawChipWaves.map(wave => wave.name));
+            this._customWavePresetDrop = buildHeaderedOptions("Load Preset", select$6({ style: "width: 50%; height:1.5em; text-align: center; text-align-last: center;" }), Config.jummboxWaves.map(wave => wave.name));
             this._customWaveZoom = button$d({ style: "margin-left:0.5em; height:1.5em; max-width: 20px;", onclick: () => this._openPrompt("customChipSettings") }, "+");
             this._customWaveDraw = div$d({ style: "height:80px; margin-top:10px; margin-bottom:5px" }, [
                 div$d({ style: "height:54px; display:flex; justify-content:center;" }, [this._customWaveDrawCanvas.canvas]),
