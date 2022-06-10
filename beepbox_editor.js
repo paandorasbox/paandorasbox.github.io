@@ -148,6 +148,11 @@ var beepbox = (function (exports) {
 		{ name: "foothihat", expression: 2.0, isSampled: true, isPercussion: true, extraSampleDetune: 4, samples: centerWave(foothihatsample) },
 		{ name: "openhihat", expression: 2.0, isSampled: true, isPercussion: true, extraSampleDetune: -31, samples: centerWave(openhihatsample) },
 		{ name: "crashcymbal", expression: 2.0, isSampled: true, isPercussion: true, extraSampleDetune: -43, samples: centerWave(crashsample) },
+		{ name: "pianoC4", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -42.5, samples: centerWave(pianoC4sample) }, 
+		{ name: "liver pad", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -22.5, samples: centerWave(liverpadsample) }, 
+		{ name: "marimba", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -15.5, samples: centerWave(marimbasample) }, 
+		{ name: "susdotwav", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -24.5, samples: centerWave(susdotwavsample) },
+		{ name: "wackyboxtts", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -17.5, samples: centerWave(wackyboxttssample) }, 
 	]);
 	Config.newWaves = toNameMap([
 		{ name: "sine", expression: 0.88, isSampled: false, samples: centerAndNormalizeWave([8.0, 9.0, 11.0, 12.0, 13.0, 14.0, 15.0, 15.0, 15.0, 15.0, 14.0, 14.0, 13.0, 11.0, 10.0, 9.0, 7.0, 6.0, 4.0, 3.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 4.0, 5.0, 6.0]) },
@@ -755,7 +760,7 @@ var beepbox = (function (exports) {
             return null;
         }
     }
-    EditorConfig.version = "3.2";
+    EditorConfig.version = "3.3";
     EditorConfig.versionDisplayName = "PandorasBox " + EditorConfig.version;
     EditorConfig.releaseNotesURL = "https://jummbus.bitbucket.io/patch_notes/" + EditorConfig.version + ".html";
     EditorConfig.isOnMac = /^Mac/i.test(navigator.platform) || /Mac OS X/i.test(navigator.userAgent) || /^(iPhone|iPad|iPod)/i.test(navigator.platform) || /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
@@ -790,6 +795,10 @@ var beepbox = (function (exports) {
         { name: "Tremolo Violin", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "tremolo violin", "unison": "none", "envelopes": [] } },
         { name: "Pizzicato Violin", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "pizzicato violin", "unison": "none", "envelopes": [] } },
 	{ name: "Tuba", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "tuba", "unison": "none", "envelopes": [] } },
+	{ name: "Piano", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "pianoC4", "unison": "none", "envelopes": [] } },
+	{ name: "Marimba", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "marimba", "unison": "none", "envelopes": [] } },
+	{ name: "Liver Pad", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "liver pad", "unison": "none", "envelopes": [] } },
+	{ name: "Sus.wav", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "susdotwav", "unison": "none", "envelopes": [] } },
         ]) },
 		{ name: "Sampled Drums", presets: toNameMap([
 				{ name: "Retro Kick", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "kick", "unison": "none", "envelopes": [] } },
@@ -802,11 +811,13 @@ var beepbox = (function (exports) {
 				{ name: "Standard Open Hi-hat", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "openhihat", "unison": "none", "envelopes": [] } },
 				{ name: "Standard Crash Cymbal", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "crashcymbal", "unison": "none", "envelopes": [] } },
 				{ name: "Looped Cymbal", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "loopingcymbal", "unison": "none", "envelopes": [] } },
+				{ name: "Amen Break", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "amen break", "unison": "none", "envelopes": [] } },
         ]) },
 		{ name: "Sampled Sound Effects", presets: toNameMap([
 				{ name: "Earthbound WOW", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "WOW", "unison": "none", "envelopes": [] } },
 				{ name: "Sonic 3 COME ON", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "come on", "unison": "none", "envelopes": [] } },
 				{ name: "Tim Allen Grunt", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "tim allen grunt", "unison": "none", "envelopes": [] } },
+				{ name: "Wackybox TTS", midiProgram: 80, settings: { "type": "chip", "eqFilter": [], "effects": [], "transition": "normal", "fadeInSeconds": 0, "fadeOutTicks": -1, "chord": "arpeggio", "wave": "wackyboxtts", "unison": "none", "envelopes": [] } },
         ]) },
         {
             name: "Retro Presets",
@@ -26885,14 +26896,12 @@ You should be redirected to the song at:<br /><br />
 	    if (category.name == "Sampled Instruments" && foundAny) {
                 let moveLegatoViolin = group.removeChild(group.children[10]);
                 group.insertBefore(moveLegatoViolin, group.children[5]);
-            }
-		if (category.name == "Sampled Instruments" && foundAny) {
-                let moveTremoloViolin = group.removeChild(group.children[11]);
+		let moveTremoloViolin = group.removeChild(group.children[11]);
                 group.insertBefore(moveTremoloViolin, group.children[6]);
-            }
-		if (category.name == "Sampled Instruments" && foundAny) {
-                let movePizzicatoViolin = group.removeChild(group.children[12]);
+		let movePizzicatoViolin = group.removeChild(group.children[12]);
                 group.insertBefore(movePizzicatoViolin, group.children[7]);
+		let movePiano = group.removeChild(group.children[14]);
+                group.insertBefore(movePiano, group.children[0]);
             }
             if (foundAny)
                 menu.appendChild(group);
