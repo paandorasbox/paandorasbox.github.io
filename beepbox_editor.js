@@ -153,6 +153,9 @@ var beepbox = (function (exports) {
 		{ name: "marimba", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -15.5, samples: centerWave(marimbasample) }, 
 		{ name: "susdotwav", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -24.5, samples: centerWave(susdotwavsample) },
 		{ name: "wackyboxtts", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -17.5, samples: centerWave(wackyboxttssample) }, 
+		{ name: "peppersteak_1", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -42.2, samples: centerWave(peppersteak1) }, 
+		{ name: "peppersteak_2", expression: 2.0, isSampled: true, isPercussion: false, extraSampleDetune: -47, samples: centerWave(peppersteak2) },
+		{ name: "vinyl_noise", expression: 2.0, isSampled: true, isPercussion: true, extraSampleDetune: -50, samples: centerWave(vinyl) },
 	]);
 	Config.newWaves = toNameMap([
 		{ name: "sine", expression: 0.88, isSampled: false, samples: centerAndNormalizeWave([8.0, 9.0, 11.0, 12.0, 13.0, 14.0, 15.0, 15.0, 15.0, 15.0, 14.0, 14.0, 13.0, 11.0, 10.0, 9.0, 7.0, 6.0, 4.0, 3.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 4.0, 5.0, 6.0]) },
