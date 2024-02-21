@@ -10797,7 +10797,7 @@ li.select2-results__option[role=group] > strong:hover {
             this.masterGain = 1.0;
         }
     }
-    Song._format = "PaandorasBox";
+    Song._format = "JummBox";
     Song._oldestBeepboxVersion = 2;
     Song._latestBeepboxVersion = 9;
     Song._oldestJummBoxVersion = 1;
